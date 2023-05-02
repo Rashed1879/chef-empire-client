@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Chef from '../Chef/Chef';
+import Chef from '../../components/Chef/Chef';
 
 const Home = () => {
 	const allChef = useLoaderData();

@@ -3,6 +3,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from '../layout/Main';
 import Home from '../pages/Home/Home';
+import ChefRecipes from '../pages/ChefRecipes/ChefRecipes';
 
 const router = createBrowserRouter([
 	{
@@ -13,6 +14,12 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <Home></Home>,
 				loader: () => fetch('http://localhost:3000/allChef'),
+			},
+			{
+				path: 'chefrecipes/:id',
+				element: <ChefRecipes></ChefRecipes>,
+				loader: ({ params }) =>
+					fetch(`http://localhost:3000/allChef/${params.id}`),
 			},
 		],
 	},
