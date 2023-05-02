@@ -7,7 +7,7 @@ const Navbar = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<nav className="bg-accent text-primary font-lora">
-			<div className="flex justify-between  items-center md:p-6 p-4">
+			<div className="flex justify-between  items-center md:p-4 p-3">
 				<h2 className="text-2xl font-bold">ChefEmpire</h2>
 				<div onClick={() => setOpen(!open)} className="md:hidden ">
 					<span>
