@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Recipe = ({ recipe }) => {
-	console.log(recipe);
 	const { name, image, cooking_method, ingredients, rating } = recipe;
+	const [clicked, setClicked] = useState(false);
+
+	const handleFavourite = () => {
+		toast('Added the recipe to your Favourites!');
+		setClicked(true);
+	};
 	return (
 		<div className="flex items-center bg-accent shadow-xl rounded-xl">
 			<div className="w-1/4 h-min">
@@ -23,7 +29,11 @@ const Recipe = ({ recipe }) => {
 					))}
 				</div>
 				<p>Cooking Method : {cooking_method}</p>
-				<button className="btn btn-primary hover:btn-secondary">
+				<button
+					onClick={handleFavourite}
+					disabled={clicked}
+					className="btn btn-primary hover:btn-secondary"
+				>
 					Favourite
 				</button>
 			</div>

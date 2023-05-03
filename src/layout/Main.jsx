@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import Home from '../pages/Home/Home';
 import Navbar from '../pages/shared/Navbar';
 import Footer from '../pages/shared/Footer';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Main = () => {
 	return (
@@ -13,6 +14,7 @@ const Main = () => {
 				<Outlet></Outlet>
 			</div>
 			<Footer></Footer>
+			<ToastContainer></ToastContainer>
 		</div>
 	);
 };
