@@ -26,7 +26,7 @@ const Register = () => {
 	return (
 		<div className="bg-base-200">
 			<h2 className="text-center py-5 text-5xl font-bold text-primary">
-				Register
+				Sign Up
 			</h2>
 			<div className="flex items-center">
 				<div className="card w-full md:w-96 mx-auto mb-8 shadow-2xl bg-base-100">
