@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
-	const { signIn, signInWithGoogle } = useContext(AuthContext);
+	const { signIn, signInWithGoogle, signInWithGithub } =
+		useContext(AuthContext);
 	const [error, setError] = useState('');
 
 	const handleLogin = (event) => {
@@ -34,6 +35,16 @@ const Login = () => {
 			});
 	};
 
+	const handleGithubSignIn = () => {
+		signInWithGithub()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 	return (
 		<div className="bg-base-200">
 			<h2 className="text-center py-5 text-5xl font-bold text-primary">
@@ -85,7 +96,10 @@ const Login = () => {
 								Google
 							</span>
 						</div>
-						<div className="form-control mt-3 border border-primary p-3 text-secondary rounded-lg text-center cursor-pointer">
+						<div
+							onClick={handleGithubSignIn}
+							className="form-control mt-3 border border-primary p-3 text-secondary rounded-lg text-center cursor-pointer"
+						>
 							Sign In With{' '}
 							<span className="text-primary font-bold">
 								Github
