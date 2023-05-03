@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
 	const { signIn, signInWithGoogle, signInWithGithub } =
 		useContext(AuthContext);
 	const [error, setError] = useState('');
+	const location = useLocation();
+	const from = location.state?.from?.pathname || '/';
+	const navigate = useNavigate();
 
 	const handleLogin = (event) => {
 		event.preventDefault();
@@ -18,6 +21,7 @@ const Login = () => {
 			.then((result) => {
 				const loggedUser = result.user;
 				console.log(loggedUser);
+				navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				setError('Wrong Credential');

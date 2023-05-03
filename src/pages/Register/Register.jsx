@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
 	const { createUser } = useContext(AuthContext);
 	const [error, setError] = useState('');
+	const navigate = useNavigate();
+
 	const handleRegister = (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -17,6 +19,7 @@ const Register = () => {
 		createUser(email, password)
 			.then((result) => {
 				const createdUser = result.user;
+				navigate('/login');
 			})
 			.catch((error) => {
 				setError('Password should be at least 6 characters');

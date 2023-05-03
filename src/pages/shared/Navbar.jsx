@@ -1,10 +1,19 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Navbar = () => {
+	const { user, logOut } = useContext(AuthContext);
 	const [open, setOpen] = useState(false);
+
+	const handleLogout = () => {
+		logOut()
+			.then()
+			.catch((error) => console.log(error));
+	};
+
 	return (
 		<nav className="bg-accent text-primary">
 			<div className="flex justify-between items-center md:p-4 p-3">
@@ -38,17 +47,57 @@ const Navbar = () => {
 						<NavLink to="/">About us</NavLink>
 					</li>
 
-					<label className="btn btn-ghost btn-circle avatar md:hidden">
-						<div className="w-10 rounded-full">
-							<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
-						</div>
-					</label>
-				</ul>
-				<label className="btn btn-ghost btn-circle avatar hidden md:block">
-					<div className="w-10 rounded-full">
-						<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
+					<div className=" md:hidden">
+						{user ? (
+							<div className="dropdown dropdown-end">
+								<label
+									tabIndex={0}
+									className="btn btn-ghost btn-circle avatar"
+								>
+									<div className="w-10 rounded-full">
+										<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
+									</div>
+								</label>
+								<ul
+									tabIndex={0}
+									className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-24 text-center cursor-pointer"
+								>
+									<div onClick={handleLogout}>Logout</div>
+								</ul>
+							</div>
+						) : (
+							<Link to="/login">
+								<button className="btn btn-primary">
+									Login
+								</button>
+							</Link>
+						)}
 					</div>
-				</label>
+				</ul>
+				<div className="hidden md:block">
+					{user ? (
+						<div className="dropdown dropdown-end">
+							<label
+								tabIndex={0}
+								className="btn btn-ghost btn-circle avatar"
+							>
+								<div className="w-10 rounded-full">
+									<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
+								</div>
+							</label>
+							<ul
+								tabIndex={0}
+								className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-24 text-center cursor-pointer"
+							>
+								<div onClick={handleLogout}>Logout</div>
+							</ul>
+						</div>
+					) : (
+						<Link to="/login">
+							<button className="btn btn-primary">Login</button>
+						</Link>
+					)}
+				</div>
 			</div>
 		</nav>
 	);

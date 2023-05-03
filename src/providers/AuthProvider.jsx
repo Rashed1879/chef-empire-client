@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
@@ -9,6 +9,7 @@ import {
 	GoogleAuthProvider,
 	GithubAuthProvider,
 	signInWithPopup,
+	onAuthStateChanged,
 } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 
@@ -20,7 +21,7 @@ const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	const createUser = (email, password) => {
@@ -34,9 +35,11 @@ const AuthProvider = ({ children }) => {
 	};
 
 	const signInWithGoogle = () => {
+		setLoading(true);
 		return signInWithPopup(auth, googleProvider);
 	};
 	const signInWithGithub = () => {
+		setLoading(true);
 		return signInWithPopup(auth, githubProvider);
 	};
 
@@ -44,6 +47,21 @@ const AuthProvider = ({ children }) => {
 		setLoading(true);
 		return signOut(auth);
 	};
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+			console.log(
+				'logged in user inside auth state observer',
+				loggedUser
+			);
+			setUser(loggedUser);
+			setLoading(false);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	const authInfo = {
 		user,
