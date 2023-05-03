@@ -7,7 +7,6 @@ import { AuthContext } from '../../providers/AuthProvider';
 const Navbar = () => {
 	const { user, logOut } = useContext(AuthContext);
 	const [open, setOpen] = useState(false);
-
 	const handleLogout = () => {
 		logOut()
 			.then()
@@ -35,16 +34,40 @@ const Navbar = () => {
 					}`}
 				>
 					<li>
-						<NavLink to="/">Home</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								isActive
+									? 'pb-1 border-b-2 border-primary hover:border-secondary'
+									: ''
+							}
+							to="/"
+						>
+							Home
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/blogs">Blog</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								isActive
+									? 'pb-1 border-b-2 border-primary hover:border-secondary'
+									: ''
+							}
+							to="/blog"
+						>
+							Blog
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/register">Sign Up</NavLink>
-					</li>
-					<li>
-						<NavLink to="/">About us</NavLink>
+						<NavLink
+							className={({ isActive }) =>
+								isActive
+									? 'pb-1 border-b-2 border-primary hover:border-secondary'
+									: ''
+							}
+							to="/register"
+						>
+							Sign Up
+						</NavLink>
 					</li>
 
 					<div className=" md:hidden">
@@ -53,9 +76,10 @@ const Navbar = () => {
 								<label
 									tabIndex={0}
 									className="btn btn-ghost btn-circle avatar"
+									title={user.displayName || user.email}
 								>
 									<div className="w-10 rounded-full">
-										<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
+										<img src={user.photoURL} />
 									</div>
 								</label>
 								<ul
@@ -80,9 +104,10 @@ const Navbar = () => {
 							<label
 								tabIndex={0}
 								className="btn btn-ghost btn-circle avatar"
+								title={user.displayName || user.email}
 							>
 								<div className="w-10 rounded-full">
-									<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600" />
+									<img src={user.photoURL} />
 								</div>
 							</label>
 							<ul

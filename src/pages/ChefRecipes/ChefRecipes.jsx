@@ -9,20 +9,26 @@ const ChefRecipes = () => {
 		chefData;
 	return (
 		<div>
-			<div className="hero min-h-screen bg-accent">
+			<div className="hero bg-[url('https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center">
+				<div className="hero-overlay bg-opacity-60"></div>
 				<div className="hero-content flex-col lg:flex-row">
 					<img
 						src={image}
-						className="max-w-lg rounded-lg shadow-2xl h-full"
+						className="w-full rounded-lg shadow-2xl h-96"
 					/>
-					<div className="text-primary ml-2">
-						<h1 className="text-5xl font-bold">{name}</h1>
+					<div className="divider bg-secondary divider-horizontal"></div>
+					<div className="text-white ml-2 h-96">
+						<h1 className="text-5xl text-warning font-bold">
+							{name}
+						</h1>
 						<p className="py-6 font-semibold">{bio}</p>
-						<p className="py-6">
+						<p className="py-6 font-semibold">
 							Year of Experience : {experience}
 						</p>
-						<p className="py-6">Number of Recipes : {recipes}</p>
-						<p className="py-6">Likes : {likes}</p>
+						<p className="py-6 font-semibold">
+							Number of Recipes : {recipes}
+						</p>
+						<p className="py-6 font-semibold">Likes : {likes}</p>
 					</div>
 				</div>
 			</div>

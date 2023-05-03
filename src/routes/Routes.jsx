@@ -8,6 +8,7 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
 import PrivateRoute from './PrivateRoute';
+import Blog from '../pages/Blog/Blog';
 
 const router = createBrowserRouter([
 	{
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
 				),
 				loader: ({ params }) =>
 					fetch(`http://localhost:3000/allChef/${params.id}`),
+			},
+			{
+				path: 'blog',
+				element: <Blog></Blog>,
 			},
 			{
 				path: 'register',

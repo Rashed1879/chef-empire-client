@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
-	const { signIn, signInWithGoogle, signInWithGithub } =
+	const { signIn, signInWithGoogle, signInWithGithub, updateUserProfile } =
 		useContext(AuthContext);
 	const [error, setError] = useState('');
 	const location = useLocation();
@@ -32,7 +32,13 @@ const Login = () => {
 		signInWithGoogle()
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				updateUserProfile(user.name, user.photoURL)
+					.then(() => {
+						navigate(from, { replace: true });
+					})
+					.catch((error) => {
+						setError('Error updating user profile');
+					});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -43,7 +49,7 @@ const Login = () => {
 		signInWithGithub()
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				console.log(error);

@@ -10,6 +10,7 @@ import {
 	GithubAuthProvider,
 	signInWithPopup,
 	onAuthStateChanged,
+	updateProfile,
 } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 
@@ -43,6 +44,13 @@ const AuthProvider = ({ children }) => {
 		return signInWithPopup(auth, githubProvider);
 	};
 
+	const updateUserProfile = (name, photo) => {
+		return updateProfile(auth.currentUser, {
+			displayName: name,
+			photoURL: photo,
+		});
+	};
+
 	const logOut = () => {
 		setLoading(true);
 		return signOut(auth);
@@ -50,10 +58,6 @@ const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-			console.log(
-				'logged in user inside auth state observer',
-				loggedUser
-			);
 			setUser(loggedUser);
 			setLoading(false);
 		});
@@ -67,6 +71,7 @@ const AuthProvider = ({ children }) => {
 		user,
 		loading,
 		createUser,
+		updateUserProfile,
 		signIn,
 		logOut,
 		signInWithGoogle,

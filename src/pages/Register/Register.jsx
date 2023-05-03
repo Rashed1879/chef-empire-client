@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
-	const { createUser } = useContext(AuthContext);
+	const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
@@ -19,7 +19,13 @@ const Register = () => {
 		createUser(email, password)
 			.then((result) => {
 				const createdUser = result.user;
-				navigate('/login');
+				updateUserProfile(name, photo)
+					.then(() => {
+						navigate('/login');
+					})
+					.catch((error) => {
+						setError('Error updating user profile');
+					});
 			})
 			.catch((error) => {
 				setError('Password should be at least 6 characters');

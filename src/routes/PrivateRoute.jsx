@@ -8,9 +8,12 @@ const PrivateRoute = ({ children }) => {
 	const { user, loading } = useContext(AuthContext);
 	const location = useLocation();
 	if (loading) {
-		return <button className="btn loading">loading</button>;
+		return (
+			<div className="flex item-center justify-center min-h-screen">
+				<button className="btn loading">loading</button>
+			</div>
+		);
 	}
-
 	if (user) {
 		return children;
 	}
