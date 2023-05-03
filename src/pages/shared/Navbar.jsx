@@ -6,9 +6,9 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
 	return (
-		<nav className="bg-accent text-primary font-lora">
-			<div className="flex justify-between  items-center md:p-4 p-3">
-				<h2 className="text-2xl font-bold">ChefEmpire</h2>
+		<nav className="bg-accent text-primary">
+			<div className="flex justify-between items-center md:p-4 p-3">
+				<h2 className="text-3xl font-bold">ChefEmpire</h2>
 				<div onClick={() => setOpen(!open)} className="md:hidden ">
 					<span>
 						{open === true ? (
@@ -30,6 +30,12 @@ const Navbar = () => {
 					</li>
 					<li>
 						<NavLink to="/blogs">Blog</NavLink>
+					</li>
+					<li>
+						<NavLink to="/register">Sign Up</NavLink>
+					</li>
+					<li>
+						<NavLink to="/">About us</NavLink>
 					</li>
 
 					<label className="btn btn-ghost btn-circle avatar md:hidden">
