@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Recipe from '../../components/Recipe/Recipe';
+import LazyLoad from 'react-lazy-load';
 
 const ChefRecipes = () => {
 	const chefData = useLoaderData();
@@ -12,10 +13,12 @@ const ChefRecipes = () => {
 			<div className="hero bg-[url('https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center">
 				<div className="hero-overlay bg-opacity-60"></div>
 				<div className="hero-content flex-col lg:flex-row">
-					<img
-						src={image}
-						className="w-full rounded-lg shadow-2xl h-96"
-					/>
+					<LazyLoad className="w-full h-96" threshold={0.95}>
+						<img
+							src={image}
+							className="w-full rounded-lg shadow-2xl h-96"
+						/>
+					</LazyLoad>
 					<div className="divider bg-secondary divider-horizontal"></div>
 					<div className="text-white ml-2 h-96">
 						<h1 className="text-5xl text-warning font-bold">
