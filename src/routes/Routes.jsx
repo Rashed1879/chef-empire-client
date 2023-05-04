@@ -19,7 +19,10 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Home></Home>,
-				loader: () => fetch('http://localhost:3000/allChef'),
+				loader: () =>
+					fetch(
+						'https://assignment-10-server-rashed1879.vercel.app/allChef'
+					),
 			},
 			{
 				path: 'chefrecipes/:id',
@@ -29,7 +32,9 @@ const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params }) =>
-					fetch(`http://localhost:3000/allChef/${params.id}`),
+					fetch(
+						`https://assignment-10-server-rashed1879.vercel.app/allChef/${params.id}`
+					),
 			},
 			{
 				path: 'blog',

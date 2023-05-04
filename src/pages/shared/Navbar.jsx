@@ -16,7 +16,9 @@ const Navbar = () => {
 	return (
 		<nav className="bg-accent text-primary">
 			<div className="flex justify-between items-center md:p-4 p-3">
-				<h2 className="text-3xl font-bold">ChefEmpire</h2>
+				<h2 className="text-3xl font-bold">
+					<span className="text-secondary">Chef</span>Empire
+				</h2>
 				<div onClick={() => setOpen(!open)} className="md:hidden ">
 					<span>
 						{open === true ? (
